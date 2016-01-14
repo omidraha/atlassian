@@ -20,7 +20,7 @@ jira.example.com   wiki.example.com   bitbucket.example.com
        +-----------------------------------------+
                            |
                            v
-                       [Postgres]
+                        Postgres
                    [host:database:5432]
                            +
                            |
