@@ -15,7 +15,7 @@ confluence:
     - ~/workspace/docker/atlassian/confluence:/var/atlassian/confluence
 
 bitbucket:
-  image: atlassian/bitbucket-server
+  image: bitbucket-server:4.3
   restart: always
   links:
     - database
