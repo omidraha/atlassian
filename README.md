@@ -2,26 +2,26 @@
 It's Atlassian docker compose file, to run Atlassian products with docker on one single machine.
 
 ```
-jira.example.com   wiki.example.com   bitbucket.example.com
-       +                   +                    +
-       |                   |                    |
-       +----------------------------------------+
+jira.example.com   wiki.example.com   bitbucket.example.com   pma.exemple.com
+       +                   +                    +                    +
+       |                   |                    |                    |
+       +----------------------------------------+--------------------+
                            |
                            v
                          Nginx
                            +
-       +-----------------------------------------+
-       |                   |                     |
-       v                   v                     v
-   Atlassian Jira    Atlassian Confluence   Atlassian Bitbucket
- [host:jira:8080]   [host:confluence:8090]  [host:bitbucket:7990]
+       +-------------------+----------------------+-----------------------------+
+       |                   |                     |                              |
+       v                   v                     v                              v
+   Atlassian Jira    Atlassian Confluence   Atlassian Bitbucket             PhpMyAdmin
+ [host:jira:8080]   [host:confluence:8090]  [host:bitbucket:7990]      [host:phpmyadmin:8080]
        +                   +                     |
        |                   |                     |
        +-----------------------------------------+
                            |
                            v
-                        Postgres
-                   [host:database:5432]
+                         Mysql
+                   [host:database:3306]
                            +
                            |
        +------------------------------------------+
@@ -33,12 +33,12 @@ jira.example.com   wiki.example.com   bitbucket.example.com
 
 Atlassian supported products:
 
-- Jira `7.0.5`
-- Confluence `5.9.4`
-- Bitbucket `4.3.0`
+- Jira `7.2.6`
+- Confluence `6.0.2`
+- Bitbucket `4.10.1`
 
 With:
-- Postgres `9.4`
+- Mysql `5.6`
 - Nginx `latest`
 
 
@@ -46,7 +46,7 @@ Docker image source files:
 
 - [cptactionhank/atlassian-jira](https://hub.docker.com/r/cptactionhank/atlassian-jira/)
 - [cptactionhank/atlassian-confluence](https://hub.docker.com/r/cptactionhank/atlassian-confluence/)
-- [atlassian/bitbucket-server](https://hub.docker.com/r/atlassian/bitbucket-server/)
+- [cptactionhank/atlassian-bitbucket](https://hub.docker.com/r/atlassian/bitbucket-server/)
 - [nginx](https://hub.docker.com/_/nginx/)
 - [postgres](https://hub.docker.com/_/postgres/)
 
