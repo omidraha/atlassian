@@ -35,12 +35,16 @@ Atlassian supported products:
 
 - Jira `7.0.5`
 - Confluence `5.9.4`
-- Bitbucket `4.3.0`
+- Bitbucket `4.14`
 
 With:
 - Postgres `9.4`
 - Nginx `latest`
 
+Requirements:
+
+- Docker version 1.13.1+
+- docker-compose version 1.10.0+
 
 Docker image source files:
 
@@ -56,30 +60,20 @@ How to use:
        ```
        $ git clone https://github.com/omidraha/atlassian
        ```
-       
-2. Make persistent directories:
+2. Set environment variables:
+
+    ```
+    $ export DOMAIN=example.com
+    ```
+
+3. Run docker compose:
+
        ```
-       $ mkdir -p ~/workspace/docker/atlassian/jira
-       $ mkdir -p ~/workspace/docker/atlassian/confluence
-       $ mkdir -p ~/workspace/docker/atlassian/bitbucket
-       $ mkdir -p ~/workspace/docker/postgres
-       $ mkdir -p ~/workspace/docker/nginx
-       ```
-       
-       The path of directories hard coded on `docker-compose.yml` file, if you want to use another path,
-       You also need to apply your change on `docker-compose.yml` file.
-       
-3. Set permission of directories:
-       ```
-       $ sudo chown -R daemon:daemon   ~/workspace/docker/atlassian
+       $ docker-compose -p atlassian up
        ```
        
-4. Run docker compose:
-       ```
-       $ docker-compose up
-       ```
-       
-5. Set `DNS` on somewhere you want to connect to host of `docker-compose`:
+4. Set `DNS` according to the above `DOMAIN` value, on somewhere that you want to connect to host of `docker-compose`:
+
        ```
        $ vim /etc/hosts
            127.0.0.1 jira.example.com www.jira.example.com
@@ -88,7 +82,8 @@ How to use:
        ```
        Replace `127.0.0.1` with IP of host that `docker-compose` command run on it.
 
-6. Create Data Bases:
+5. Create Databases:
+
        ```
        $ docker exec -it atlassian_database_1  psql -U postgres
            postgres=# CREATE DATABASE jira;
@@ -98,10 +93,22 @@ How to use:
            postgres-# \q
        ```
        
-7. Browse Atlassian products:
+6. Browse Atlassian products:
+
        ```
-       http:://jira.example.com
-       http:://wiki.example.com
-       http:://bitbucket.example.com
+       http://jira.example.com
+       http://wiki.example.com
+       http://bitbucket.example.com
        ```
 
+Notes: 
+
+Data persisted on the  named volumes, to see them:
+
+       ```
+       $ docker volume ls
+        local               atlassian_bitbucket-data
+        local               atlassian_confluence-data
+        local               atlassian_jira-data
+        local               atlassian_database-data
+       ```
