@@ -57,50 +57,65 @@ Docker image source files:
 How to use:
 
 1. Clone the atlassian:
-```
-$ git clone https://github.com/omidraha/atlassian
-```
+
+
+    ```
+    $ git clone https://github.com/omidraha/atlassian
+    ```
 
 2. Set environment variables:
-```
- $ export DOMAIN=example.com
-```
+
+
+    ```
+    $ export DOMAIN=example.com
+     ```
+ 
 3. Run docker compose:
-```
-$ docker-compose -p atlassian up
-```
-       
+
+
+    ```
+    $ docker-compose -p atlassian up
+    ```
+    
 4. Set `DNS` according to the above `DOMAIN` value, on somewhere that you want to connect to host of `docker-compose`:
-```
-$ vim /etc/hosts
-    127.0.0.1 jira.example.com www.jira.example.com
-    127.0.0.1 wiki.example.com www.wiki.example.com
-    127.0.0.1 bitbucket.example.com www.bitbucket.example.com
-```
+
+
+    ``` 
+    $ vim /etc/hosts
+        127.0.0.1 jira.example.com www.jira.example.com
+        127.0.0.1 wiki.example.com www.wiki.example.com
+        127.0.0.1 bitbucket.example.com www.bitbucket.example.com
+    ```
 Replace `127.0.0.1` with IP of host that `docker-compose` command run on it.
 
 5. Create Databases:
-```
-$ docker exec -it atlassian_database_1  psql -U postgres
-   postgres=# CREATE DATABASE jira;
-   postgres=# CREATE DATABASE wiki;
-   postgres=# CREATE DATABASE bitbucket;
-   postgres=# \l
-   postgres-# \q
-```
+
+
+    ```
+    $ docker exec -it atlassian_database_1  psql -U postgres
+       postgres=# CREATE DATABASE jira;
+       postgres=# CREATE DATABASE wiki;
+       postgres=# CREATE DATABASE bitbucket;
+       postgres=# \l
+       postgres-# \q
+    ```
+    
 6. Browse Atlassian products:
-```
-http://jira.example.com
-http://wiki.example.com
-http://bitbucket.example.com
-```
+
+
+        ```
+        http://jira.example.com
+        http://wiki.example.com
+        http://bitbucket.example.com
+        ```
+        
 Notes: 
 
 Data persisted on the  named volumes, to see them:
-```
-$ docker volume ls
-local               atlassian_bitbucket-data
-local               atlassian_confluence-data
-local               atlassian_jira-data
-local               atlassian_database-data
-```
+
+
+       $ docker volume ls
+       local               atlassian_bitbucket-data
+       local               atlassian_confluence-data
+       local               atlassian_jira-data
+       local               atlassian_database-data
