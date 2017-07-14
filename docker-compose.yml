@@ -1,7 +1,7 @@
 version: '3'
 services:
   jira:
-    image: cptactionhank/atlassian-jira:7.0.5
+    image: cptactionhank/atlassian-jira:7.3.0
     restart: always
     links:
       - database
@@ -9,7 +9,7 @@ services:
       - jira-data:/var/atlassian/jira
 
   confluence:
-    image: cptactionhank/atlassian-confluence:5.9.4
+    image: cptactionhank/atlassian-confluence:6.3.1
     restart: always
     links:
       - database
@@ -17,34 +17,48 @@ services:
       - confluence-data:/var/atlassian/confluence
 
   bitbucket:
-    image: atlassian/bitbucket-server:4.14
+    image: cptactionhank/atlassian-bitbucket
     restart: always
     links:
       - database
     volumes:
       - bitbucket-data:/var/atlassian/application-data/bitbucket
 
-  database:
-    image: postgres:9.4
+  bamboo:
+    image: cptactionhank/atlassian-bamboo
     restart: always
+    links:
+      - database
+    volumes:
+      - bamboo-data:/var/atlassian/application-data/bamboo
+
+  database:
+    image: sameersbn/postgresql
+    restart: always
+    environment:
+      DB_NAME: jira,wiki,bitbucket,bamboo
     volumes:
       - database-data:/var/lib/postgresql/data
+
   nginx:
     image: nginx
     restart: always
     ports:
-      - "80:80"
+      - "81:80"
     links:
       - jira
       - confluence
       - bitbucket
+      - bamboo
     volumes:
     - ./:/src
     command: ./src/scripts/run_nginx.sh
     environment:
-    - DOMAIN
+    - DOMAIN=localhost
+
 volumes:
   jira-data:
   confluence-data:
   bitbucket-data:
+  bamboo-data:
   database-data:
