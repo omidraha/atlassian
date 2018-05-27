@@ -33,9 +33,9 @@ jira.example.com   wiki.example.com   bitbucket.example.com
 
 Atlassian supported products:
 
-- Jira `7.0.5`
-- Confluence `5.9.4`
-- Bitbucket `4.14`
+- Jira `7.9.2`
+- Confluence `6.9.0`
+- Bitbucket `5.10.1`
 
 With:
 - Postgres `9.4`
@@ -69,22 +69,23 @@ How to use:
     ```
     $ export DOMAIN=example.com
      ```
- 
+
 3. Run docker compose:
 
 
     ```
     $ docker-compose -p atlassian up
     ```
-    
+
 4. Set `DNS` according to the above `DOMAIN` value, on somewhere that you want to connect to host of `docker-compose`:
 
 
-    ``` 
+    ```
     $ vim /etc/hosts
         127.0.0.1 jira.example.com www.jira.example.com
         127.0.0.1 wiki.example.com www.wiki.example.com
         127.0.0.1 bitbucket.example.com www.bitbucket.example.com
+        127.0.0.1 bamboo.example.com www.bamboo.example.com
     ```
 Replace `127.0.0.1` with IP of host that `docker-compose` command run on it.
 
@@ -99,7 +100,7 @@ Replace `127.0.0.1` with IP of host that `docker-compose` command run on it.
        postgres=# \l
        postgres-# \q
     ```
-    
+
 6. Browse Atlassian products:
 
 
@@ -108,8 +109,8 @@ Replace `127.0.0.1` with IP of host that `docker-compose` command run on it.
         http://wiki.example.com
         http://bitbucket.example.com
         ```
-        
-Notes: 
+
+Notes:
 
 Data persisted on the  named volumes, to see them:
 
