@@ -85,7 +85,6 @@ How to use:
         127.0.0.1 jira.example.com www.jira.example.com
         127.0.0.1 wiki.example.com www.wiki.example.com
         127.0.0.1 bitbucket.example.com www.bitbucket.example.com
-        127.0.0.1 bamboo.example.com www.bamboo.example.com
     ```
 Replace `127.0.0.1` with IP of host that `docker-compose` command run on it.
 
