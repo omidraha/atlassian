@@ -24,12 +24,6 @@ services:
     volumes:
       - bitbucket-data:/var/atlassian/application-data/bitbucket
 
-  bamboo:
-    image: cptactionhank/atlassian-bamboo:latest
-    restart: always
-    volumes:
-      - bamboo-data:/var/atlassian/bamboo
-
   database:
     image: postgres:9.4
     restart: always
@@ -41,7 +35,6 @@ services:
     ports:
       - "80:80"
     links:
-      - bamboo
       - jira
       - confluence
       - bitbucket
@@ -54,5 +47,4 @@ volumes:
   jira-data:
   confluence-data:
   bitbucket-data:
-  bamboo-data:
   database-data:
