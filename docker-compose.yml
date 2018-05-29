@@ -1,7 +1,7 @@
-version: '3'
+version: '3.4'
 services:
   jira:
-    image: cptactionhank/atlassian-jira:7.0.5
+    image: cptactionhank/atlassian-jira:7.9.2
     restart: always
     links:
       - database
@@ -9,7 +9,7 @@ services:
       - jira-data:/var/atlassian/jira
 
   confluence:
-    image: cptactionhank/atlassian-confluence:5.9.4
+    image: cptactionhank/atlassian-confluence:6.9.0
     restart: always
     links:
       - database
@@ -17,7 +17,7 @@ services:
       - confluence-data:/var/atlassian/confluence
 
   bitbucket:
-    image: atlassian/bitbucket-server:4.14
+    image: atlassian/bitbucket-server:5.10.1
     restart: always
     links:
       - database
